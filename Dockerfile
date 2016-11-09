@@ -5,4 +5,7 @@ RUN apk --update add logrotate
 RUN echo "*/5 *	* * *	/usr/sbin/logrotate /etc/logrotate.conf" >> /etc/crontabs/root
 ADD logrotate.conf /etc/logrotate.conf
 
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["crond", "-f"]
